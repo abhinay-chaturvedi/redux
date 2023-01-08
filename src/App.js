@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import NavBar from "./components/navbar";
+import RightBar from "./components/rightbar";
+import SideBar from "./components/sidebar";
+import Update from "./components/update";
+import Box from '@mui/material/Box';
+import { Divider, Stack } from "@mui/material";
+import { useState } from "react";
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box className="App">
+     <NavBar/ >
+     <Stack
+        direction="row"
+        divider={<Divider orientation="vertical" flexItem />}
+        spacing={2}
+      >
+     <SideBar />
+     <Update/>
+     <RightBar/>
+      </Stack>
+   
+    </Box>
   );
 }
 
