@@ -53,7 +53,7 @@ const ContentBox=styled("Box")({
 })
 
 const NavBar=()=>{
-  const name=useSelector((state)=>state.user.name);
+  const name=useSelector((state)=>state.user.userInfo.name);
     return (
     
     <AppBar  sx={{backgroundColor:"white",padding:"0"}} position="static">

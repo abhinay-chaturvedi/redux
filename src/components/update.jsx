@@ -2,7 +2,8 @@ import { Avatar, Box, Button, Typography,styled, InputBase } from "@mui/material
 import { useState } from "react"
 
 import {useSelector,useDispatch} from "react-redux"
-import { update } from "../redux/userSlice"
+import { updateUser } from "../redux/apiCalls"
+import { update,remove,addHello } from "../redux/userSlice"
 const UserBox=styled("Box")({
     display:"flex",
     gap:"10px",
@@ -23,12 +24,18 @@ const Search=styled("div")({
 const Update=()=>{
     const [name,setName]=useState("");
     const [email,setEmail]=useState("");
-    // console.log(name,email);
+    const user=useSelector((state)=>state.user.userInfo)
+    // console.log("rendering update");
     const dispatch=useDispatch();
-    const handleUpdate=()=>{
-        dispatch(update({name,email}))
+    const handleUpdate=(e)=>{
+        updateUser({name,email},dispatch);
     }
-    const user=useSelector((state)=>state.user)
+    const handleDelete=(e)=>{
+        console.log("clicked");
+        // dispatch(remove())
+    }
+
+   
     return (
         <Box  flexGrow={2}>
             <Typography marginTop="10px" variant="h6">Update Your Account</Typography>
@@ -36,7 +43,7 @@ const Update=()=>{
             <Box padding="4px" backgroundColor="#f5d9a9" borderRadius={2} marginBottom="20px" >
                 Deleting  account cannot be undone {user.name}! You should confirm your password to delete your <div className=""></div>
             </Box>
-            <Button variant="contained" disableElevation>
+            <Button onClick={handleDelete} variant="contained" disableElevation>
             
           Delete Account
           </Button>
@@ -48,9 +55,9 @@ const Update=()=>{
             <Button variant="text">Change</Button>
             </UserBox>
             <Typography variant="span">Username</Typography>
-            <Search><InputBase onChange={e=>{setName(e.target.value)}} placeholder="username"/></Search>
+            <Search><InputBase onChange={e=>{setName(e.target.value)}} placeholder={user.name}/></Search>
             <Typography variant="span">Email</Typography>
-            <Search><InputBase onChange={e=>{setEmail(e.target.value)}} placeholder="email"/></Search>
+            <Search><InputBase onChange={e=>{setEmail(e.target.value)}} placeholder={user.email}/></Search>
             <Typography variant="span">Password</Typography>
             <Search><InputBase placeholder="password"/></Search>
             <Button onClick={handleUpdate} sx={{ marginTop:"10px"}} variant="contained" disableElevation>

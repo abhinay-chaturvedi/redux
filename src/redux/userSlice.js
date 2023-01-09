@@ -4,15 +4,29 @@ import { createSlice} from '@reduxjs/toolkit'
 export const userSlice=createSlice({
     name:"user",
     initialState:{
-        name:"abhinay",
-        email:"abhinay@gmail.com"
+        userInfo:{
+            name:"abhinay",
+            email:"abhinay@gmail.com"
+        },
+        pending:false,
+        error:false
     },
     reducers:{
-        update:(state,action)=>{
-            state.name=action.payload.name; 
-            state.email=action.payload.email
+        updateStart:(state)=>{
+            console.log("updatestart runs")
+            state.pending=true;
+        },
+        updateSuccess:(state,action)=>{
+            console.log("updateSuccess runs")
+            state.pending=false;
+            state.userInfo=action.payload
+        },
+        updateError:(state)=>{
+            console.log("updateError runs")
+            state.error=false;
+            state.pending=false;
         }
     }
 })
-export const {update}=userSlice.actions
+export const {updateStart,updateSuccess,updateError}=userSlice.actions
 export default userSlice.reducer

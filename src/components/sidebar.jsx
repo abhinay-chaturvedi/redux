@@ -16,7 +16,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import {useSelector} from "react-redux"
 const SideBar=()=>{
     // const log=""
-    const name=useSelector((state)=>state.user.name)
+    const name=useSelector((state)=>state.user.userInfo.name)
     return (
         <Box  flexGrow={1.5}>
          
